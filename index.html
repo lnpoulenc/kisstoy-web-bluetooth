@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f4ee">
+  <meta name="description" content="迷路与 Polly Max 的本地蓝牙面板，使用 Bluefy 连接并控制设备。">
+  <title>KissToy · 本地遥控</title>
+  <link rel="stylesheet" href="./style.css?v=20261013-quick-switch">
+</head>
+<body>
+<main>
+  <header><a class="brand" href="./" aria-label="首页"><span class="brand-mark">k.</span> KISSTOY <small>LOCAL</small></a><span class="local-tag"><i></i> 仅本机蓝牙</span></header>
+  <section class="intro"><p class="eyebrow">YOUR SPACE, YOUR PACE</p><h1>自在掌控，<br><span>近在指尖。</span></h1><p>选择你的设备，开始本地连接。<br>通过 iPhone 蓝牙直连，无需官方 APP。</p></section>
+  <div id="compat" class="notice" role="status" hidden></div>
+  <section class="device card" aria-labelledby="deviceTitle">
+    <div class="device-top"><div class="device-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M24 7v34l12-10L13 14m11-7 12 10-23 17" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="eyebrow">MY DEVICE</p><h2 id="deviceTitle">自动识别设备</h2><p id="deviceName">迷路 / Polly Max · 本机蓝牙</p></div><span id="status" class="status">未连接</span></div>
+    <p id="modelHint" class="model-description">选中设备后，自动识别型号与通道功能。</p>
+    <button id="connect" class="primary">连接 / 自动识别设备 <span aria-hidden="true">↗</span></button>
+    <p id="connectionHint" class="hint">开启设备后，选择 QCSW 或 PLMX，无需手动选择型号。</p>
+    <div class="my-devices" aria-labelledby="devicesTitle">
+      <h3 id="devicesTitle">我的设备 <small>点击切换</small></h3>
+      <p id="devicesEmpty" class="model-description">连接过的设备会显示在这里。</p>
+      <div id="deviceList" class="device-list"></div>
+      <p id="devicesHint" class="hint">已连接的设备可直接切换；每次切换先停止上一台。</p>
+    </div>
+    <label class="resume-setting"><input id="autoResume" type="checkbox"> 短暂断线后自动恢复强度</label>
+    <p class="hint">30 秒内重连成功可继续刚才的强度；按停止会取消恢复。</p>
+    <label class="resume-setting"><input id="backgroundMode" type="checkbox"> 切到后台继续运行</label>
+    <p class="hint">默认关闭。开启后切换 APP 或锁屏不主动停止；需 Bluefy 允许后台蓝牙。系统仍可能暂停网页。</p>
+    <button id="resume" class="secondary" hidden>恢复刚才的强度</button>
+    <button id="disconnect" class="text-button" hidden>停止并断开连接</button>
+  </section>
+  <div class="section-heading"><h2>手动控制</h2><span>滑动微调 · 点击快捷档位</span></div>
+  <section class="controls" aria-label="双通道强度">
+    <article class="card motor"><div class="motor-head"><span class="motor-icon" aria-hidden="true">≋</span><div><h3 id="label1">通道 1 <small>连接后识别</small></h3><p>按自己的节奏</p></div><output id="value1" for="motor1">0<small>%</small></output></div><input id="motor1" type="range" min="0" max="100" step="5" value="0" aria-labelledby="label1" disabled><div class="scale"><span>关闭</span><span>设定强度</span><span>100%</span></div><div class="quick-levels" role="group" aria-labelledby="label1"><button id="quick1-0" type="button" aria-pressed="false" disabled>0%</button><button id="quick1-25" type="button" aria-pressed="false" disabled>25%</button><button id="quick1-50" type="button" aria-pressed="false" disabled>50%</button><button id="quick1-75" type="button" aria-pressed="false" disabled>75%</button><button id="quick1-100" type="button" aria-pressed="false" disabled>100%</button></div></article>
+    <article class="card motor"><div class="motor-head"><span class="motor-icon suction" aria-hidden="true">◎</span><div><h3 id="label2">通道 2 <small>连接后识别</small></h3><p>轻调，慢慢找到喜欢</p></div><output id="value2" for="motor2">0<small>%</small></output></div><input id="motor2" type="range" min="0" max="100" step="5" value="0" aria-labelledby="label2" disabled><div class="scale"><span>关闭</span><span>设定强度</span><span>100%</span></div><div class="quick-levels" role="group" aria-labelledby="label2"><button id="quick2-0" type="button" aria-pressed="false" disabled>0%</button><button id="quick2-25" type="button" aria-pressed="false" disabled>25%</button><button id="quick2-50" type="button" aria-pressed="false" disabled>50%</button><button id="quick2-75" type="button" aria-pressed="false" disabled>75%</button><button id="quick2-100" type="button" aria-pressed="false" disabled>100%</button></div></article>
+  </section>
+  <p id="feedback" class="feedback" role="status" aria-live="polite">连接后解锁控制。初次连接不会启动电机。</p>
+  <details class="help card"><summary>第一次使用 <span>＋</span></summary><ol><li>在 iPhone 上使用 <a href="https://apps.apple.com/app/id1492822055" target="_blank" rel="noreferrer">Bluefy 浏览器</a>打开此 HTTPS 页面。</li><li>打开设备，关闭占用设备蓝牙的其他 APP。</li><li>点击“连接 / 自动识别设备”，允许蓝牙权限并选择 QCSW 或 PLMX。型号会自动识别；再次点击可添加另一台，在“我的设备”中点击切换。</li><li>先小幅调节单个通道，确认设备反应；使用后点击停止。</li></ol><p>未开启“切到后台继续运行”时，切后台会尝试停止。关闭或刷新网页也会尝试停止，但系统挂起或蓝牙断开时无法保证送达，可使用设备实体按键停止。</p><p class="compat-note">QCSW 使用公开 Galaku 双通道协议；PLMX 使用公开旧版单通道命令。根据用户实测，PLMX 通道 1 是旋转，通道 2 是吮吸。其他批次的兼容性仍待验证。写入成功不等于设备已执行。</p></details>
+  <details class="help card"><summary>后台运行怎么设置 <span>＋</span></summary><ol><li>在 Bluefy 设置中查找 Allowed BLE peripheral manager（允许后台连接的蓝牙设备管理），允许已选择的设备在后台连接。</li><li>回到网页，开启“切到后台继续运行”。如希望短暂掉线后继续原强度，同时开启“短暂断线后自动恢复强度”。</li><li>先连接并低强度测试，再切换 APP 或锁屏，确认设备是否继续。</li></ol><p>这是网页的后台尝试模式，不会启动灵动岛。Bluefy 或 iOS 暂停网页时，控制与自动重连可能暂停；返回页面后可查看诊断记录。开关每次重新打开网页默认关闭。</p></details>
+  <details class="help card"><summary>连接诊断 <span>＋</span></summary><p>后台开关版 · 2026-10-12。意外断线后会尝试重连 5 次；失败后可点击“重新连接”。如仍频繁掉线，请复制下方记录。</p><p>通道功能以实机反应为准；若两个功能相反，可在断开时交换标记。</p><label class="swap"><input id="swap" type="checkbox"> <span id="swapLabel">交换两个通道</span></label><button id="copyLog" class="secondary">复制诊断记录</button><pre id="log" tabindex="0">等待连接…</pre></details>
+  <footer>LOCAL CONNECTION. PERSONAL CONTROL.<br><span>网页不上传控制数据，也不连接官方服务器。</span></footer>
+</main>
+<div class="stop-bar"><div><span class="stop-indicator"></span><span id="stopHint">等待设备连接</span></div><button id="stop" disabled><span class="stop-square" aria-hidden="true"></span>全部停止</button></div>
+<script type="module" src="./app.mjs?v=20261013-quick-switch"></script>
+</body>
+</html>

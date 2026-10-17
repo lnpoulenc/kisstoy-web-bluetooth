@@ -1,0 +1,14 @@
+{
+  "name": "kisstoy-web-bluetooth",
+  "version": "1.0.0",
+  "description": "Local Web Bluetooth controller for QCSW and PLMX, designed for iPhone with Bluefy.",
+  "type": "module",
+  "private": true,
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
